@@ -47,6 +47,8 @@ delete() {
         ((KEEP += 1))
     fi
 
+    local DELETE_COUNT=0
+
     while :; do
         # shellcheck disable=SC2086
         RUN_IDS=$(gh run list $GH_RUN_LIST_ARGS --json databaseId --jq '.[] | join("")' | tail -n +"$KEEP")
@@ -55,9 +57,13 @@ delete() {
         fi
 
         for RUN_ID in $RUN_IDS; do
-            gh run delete "$RUN_ID"
+            echo "- Deleting workflow run [$RUN_ID]"
+            gh run delete "$RUN_ID" >/dev/null
+            ((DELETE_COUNT += 1))
         done
     done
+
+    echo "Workflow runs deleted! [$DELETE_COUNT]"
 
     echo "::endgroup::"
 }
