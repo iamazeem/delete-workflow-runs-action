@@ -1,5 +1,9 @@
 # delete-workflow-runs-action
 
+[![CI](https://github.com/iamazeem/delete-workflow-runs-action/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/iamAzeem/delete-workflow-runs-action/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-darkgreen.svg?style=flat-square)](https://github.com/iamAzeem/delete-workflow-runs-action/blob/master/LICENSE)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/iamAzeem/delete-workflow-runs-action?style=flat-square)
+
 GitHub Action to delete workflow runs.
 
 ## Usage

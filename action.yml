@@ -6,10 +6,52 @@ branding:
   icon: x
   color: red
 
+inputs:
+  include-disabled-workflows:
+    description: Include disabled workflows
+    required: false
+    default: "false"
+  branch:
+    description: Filter by branch
+    required: false
+  commit-sha:
+    description: Filter by commit SHA
+    required: false
+  creation-date:
+    description: Filter by creation date e.g. `2025-02-24T01:00:00Z`
+    required: false
+  event:
+    description: Filter by event e.g. `pull_request`
+    required: false
+  status:
+    description: Filter by status e.g. `cancelled`
+    required: false
+  username:
+    description: Filter by username
+    required: false
+  workflow:
+    description: Filter by workflow file e.g. `ci.yml`
+    required: false
+  exclude-last:
+    description: Exclude last workflow runs e.g. `1`
+    required: false
+    default: "0"
+
 runs:
   using: composite
   steps:
     - name: Delete
+      env:
+        INCLUDE_DISABLED_WORKFLOWS: ${{ inputs.include-disabled-workflows == 'true' }}
+        BRANCH: ${{ inputs.branch }}
+        COMMIT_SHA: ${{ inputs.commit-sha }}
+        CREATION_DATE: ${{ inputs.creation-date }}
+        EVENT: ${{ inputs.event }}
+        STATUS: ${{ inputs.status }}
+        USERNAME: ${{ inputs.username }}
+        WORKFLOW: ${{ inputs.workflow }}
+        EXCLUDE_LAST: ${{ inputs.exclude-last > 0 && inputs.exclude-last || 0 }}
       shell: bash
       run: |
+        $GITHUB_ACTION_PATH/scripts/validate.bash
         $GITHUB_ACTION_PATH/scripts/delete.bash

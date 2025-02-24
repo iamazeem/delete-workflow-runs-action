@@ -32,7 +32,15 @@ validate_environment() {
 validate_inputs() {
     echo "::group::Validating inputs"
 
-    # TODO: Validate inputs
+    echo "- include-disabled-workflows: [$INCLUDE_DISABLED_WORKFLOWS]"
+    echo "- branch: [$BRANCH]"
+    echo "- commit-sha: [$COMMIT_SHA]"
+    echo "- creation-date: [$CREATION_DATE]"
+    echo "- event: [$EVENT]"
+    echo "- status: [$STATUS]"
+    echo "- username: [$USERNAME]"
+    echo "- workflow: [$WORKFLOW]"
+    echo "- exclude-last: [$EXCLUDE_LAST]"
 
     echo "::endgroup::"
 }
