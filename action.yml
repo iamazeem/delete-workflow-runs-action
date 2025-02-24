@@ -10,7 +10,7 @@ inputs:
   include-disabled-workflows:
     description: Include disabled workflows
     required: false
-    default: "false"
+    default: "true"
   branch:
     description: Filter by branch
     required: false
@@ -30,10 +30,10 @@ inputs:
     description: Filter by username
     required: false
   workflow:
-    description: Filter by workflow file e.g. `ci.yml`
+    description: Filter by workflow filename e.g. `ci.yml`
     required: false
-  exclude-last:
-    description: Exclude last workflow runs e.g. `1`
+  keep:
+    description: Keep last workflow runs [min=0, max=10]
     required: false
     default: "0"
 
@@ -50,7 +50,7 @@ runs:
         STATUS: ${{ inputs.status }}
         USERNAME: ${{ inputs.username }}
         WORKFLOW: ${{ inputs.workflow }}
-        EXCLUDE_LAST: ${{ inputs.exclude-last > 0 && inputs.exclude-last || 0 }}
+        KEEP: ${{ (inputs.keep < 0 || inputs.keep > 10) && 0 || inputs.keep }}
       shell: bash
       run: |
         $GITHUB_ACTION_PATH/scripts/validate.bash
