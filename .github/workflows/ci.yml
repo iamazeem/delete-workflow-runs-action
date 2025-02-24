@@ -27,8 +27,8 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout ${{ github.repository }}
-      uses: actions/checkout@v4
+    # - name: Checkout
+    #   uses: actions/checkout@v4
 
     - name: Run
       uses: ./
