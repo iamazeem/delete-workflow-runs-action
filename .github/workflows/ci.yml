@@ -30,6 +30,9 @@ jobs:
     # - name: Checkout
     #   uses: actions/checkout@v4
 
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Run
       uses: ./
       with:
