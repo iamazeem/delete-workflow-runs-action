@@ -16,9 +16,9 @@ trap 'fatal "$LINENO" "$BASH_COMMAND"' ERR
 validate_environment() {
     echo "::group::Validating environment"
 
-    echo "BASH_VERSION: [$BASH_VERSION]"
+    echo "- BASH_VERSION: [$BASH_VERSION]"
 
-    echo "Validating GitHub CLI (gh)"
+    echo "- Validating GitHub CLI (gh)"
     if ! which gh; then
         echo "gh command not found!"
         exit 1

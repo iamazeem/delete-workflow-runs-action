@@ -57,13 +57,13 @@ delete() {
         fi
 
         for RUN_ID in $RUN_IDS; do
-            echo "x $RUN_ID"
+            echo "x Deleting $RUN_ID"
             gh run delete "$RUN_ID" >/dev/null
             ((DELETE_COUNT += 1))
         done
     done
 
-    echo "$DELETE_COUNT workflow runs deleted!"
+    echo "$DELETE_COUNT workflow run(s) deleted!"
 
     echo "::endgroup::"
 }
