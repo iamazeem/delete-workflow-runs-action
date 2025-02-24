@@ -7,6 +7,10 @@ branding:
   color: red
 
 inputs:
+  token:
+    description: GitHub Token
+    required: false
+    default: "${{ github.token }}"
   include-disabled-workflows:
     description: Include disabled workflows
     required: false
@@ -42,6 +46,7 @@ runs:
   steps:
     - name: Delete
       env:
+        GH_TOKEN: ${{ inputs.token }}
         INCLUDE_DISABLED_WORKFLOWS: ${{ inputs.include-disabled-workflows == 'true' }}
         BRANCH: ${{ inputs.branch }}
         COMMIT_SHA: ${{ inputs.commit-sha }}
