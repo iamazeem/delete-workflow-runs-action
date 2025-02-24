@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md']
+  pull_request:
+    branches: [main]
+    paths-ignore: ['**.md']
+  workflow_dispatch:
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    # Permissions required to delete previous workflow runs
+    # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+    permissions:
+      actions: write
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout ${{ github.repository }}
+      uses: actions/checkout@v4
+
+    - name: Run
+      uses: ./
+
