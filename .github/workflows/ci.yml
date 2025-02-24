@@ -19,8 +19,9 @@ jobs:
 
     # Permissions required to delete previous workflow runs
     # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
-    # permissions:
-      # actions: write
+    permissions:
+      contents: write
+      actions: write
 
     defaults:
       run:
