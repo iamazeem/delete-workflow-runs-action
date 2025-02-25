@@ -29,7 +29,7 @@ for a complete list of events.
 
 For the `status` input parameter, see
 [List workflow runs for a repository](https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#list-workflow-runs-for-a-repository)
-API for all the supported values or [`gh run list`](https://cli.github.com/manual/gh_run_list).
+API for all the supported values.
 
 ### Permissions
 
@@ -52,7 +52,7 @@ permissions:
 - uses: iamazeem/delete-workflow-runs-action@v1
 ```
 
-#### Delete all workflow runs except the disabled ones
+#### Delete all workflow runs excluding the disabled ones
 
 ```yml
 - uses: iamazeem/delete-workflow-runs-action@v1
