@@ -23,13 +23,13 @@ GitHub Action to delete workflow runs.
 |          `workflow`          |  false   |                       | Filter by workflow filename e.g. `ci.yml`           |
 |            `keep`            |  false   |          `0`          | Keep last workflow runs [min=0, max=10]             |
 
-For the `event` input parameter, see [Events that trigger
+For `event`, see [Events that trigger
 workflows](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
-for a complete list of events.
+for the complete list.
 
-For the `status` input parameter, see
+For `status`, see
 [List workflow runs for a repository](https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#list-workflow-runs-for-a-repository)
-API for all the supported values.
+API for all its supported values.
 
 ### Permissions
 
