@@ -11,27 +11,19 @@ on:
 
 jobs:
   ci:
-    strategy:
-      matrix:
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
-    # Permissions required to delete previous workflow runs
-    # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+    # Permissions `actions: write` are required to delete previous workflow runs.
+    # Reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
     permissions:
       contents: write
       actions: write
-
-    defaults:
-      run:
-        shell: bash
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Run
+    - name: Delete
       uses: ./
       with:
         keep: 1
