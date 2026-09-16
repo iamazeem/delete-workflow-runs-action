@@ -37,5 +37,5 @@ jobs:
     - name: Delete
       uses: ./
       with:
-        workflow: ${{ github.event.inputs.workflow }}
-        keep: ${{ github.event.inputs.keep }}
+        workflow: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.workflow || 'ci.yml' }}
+        keep: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.keep || 1 }}
