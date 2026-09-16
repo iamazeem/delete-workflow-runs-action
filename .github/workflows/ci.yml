@@ -8,6 +8,17 @@ on:
     branches: [main]
     paths-ignore: ['**.md']
   workflow_dispatch:
+    inputs:
+      workflow:
+        description: 'Workflow filename to delete previous runs'
+        required: false
+        default: ci.yml
+        type: string
+      keep:
+        description: 'Number of workflow runs to keep'
+        required: false
+        default: 1
+        type: number
 
 jobs:
   ci:
@@ -26,4 +37,5 @@ jobs:
     - name: Delete
       uses: ./
       with:
-        keep: 1
+        workflow: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.workflow || 'ci.yml' }}
+        keep: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.keep || 1 }}
