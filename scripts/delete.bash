@@ -5,7 +5,7 @@ set -eE -o functrace -o pipefail
 fatal() {
     local LINE="$1"
     local CMD="$2"
-    echo "[FATAL] $LINE: $CMD"
+    echo "[FATAL] $LINE: $CMD" >&2
     exit 1
 }
 
