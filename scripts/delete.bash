@@ -16,31 +16,31 @@ trap 'fatal "$LINENO" "$BASH_COMMAND"' ERR
 delete() {
     echo "::group::Deleting workflow runs"
 
-    local GH_RUN_LIST_ARGS=" --limit 100"
+    local GH_RUN_LIST_ARGS=(--limit 100)
 
     if [[ -n $INCLUDE_DISABLED_WORKFLOWS ]]; then
-        GH_RUN_LIST_ARGS+=" --all"
+        GH_RUN_LIST_ARGS+=(--all)
     fi
     if [[ -n $BRANCH ]]; then
-        GH_RUN_LIST_ARGS+=" --branch $BRANCH"
+        GH_RUN_LIST_ARGS+=(--branch "$BRANCH")
     fi
     if [[ -n $COMMIT_SHA ]]; then
-        GH_RUN_LIST_ARGS+=" --commit $COMMIT_SHA"
+        GH_RUN_LIST_ARGS+=(--commit "$COMMIT_SHA")
     fi
     if [[ -n $CREATION_DATE ]]; then
-        GH_RUN_LIST_ARGS+=" --created $CREATION_DATE"
+        GH_RUN_LIST_ARGS+=(--created "$CREATION_DATE")
     fi
     if [[ -n $EVENT ]]; then
-        GH_RUN_LIST_ARGS+=" --event $EVENT"
+        GH_RUN_LIST_ARGS+=(--event "$EVENT")
     fi
     if [[ -n $STATUS ]]; then
-        GH_RUN_LIST_ARGS+=" --status $STATUS"
+        GH_RUN_LIST_ARGS+=(--status "$STATUS")
     fi
     if [[ -n $USERNAME ]]; then
-        GH_RUN_LIST_ARGS+=" --user $USERNAME"
+        GH_RUN_LIST_ARGS+=(--user "$USERNAME")
     fi
     if [[ -n $WORKFLOW ]]; then
-        GH_RUN_LIST_ARGS+=" --workflow $WORKFLOW"
+        GH_RUN_LIST_ARGS+=(--workflow "$WORKFLOW")
     fi
 
     if ((KEEP > 0)); then
@@ -50,8 +50,11 @@ delete() {
     local DELETE_COUNT=0
 
     while :; do
-        # shellcheck disable=SC2086
-        RUN_IDS=$(gh run list $GH_RUN_LIST_ARGS --json databaseId --jq '.[] | join("")' | tail -n +"$KEEP")
+        RUN_IDS=$(gh run list "${GH_RUN_LIST_ARGS[@]}" \
+            --json databaseId \
+            --jq '.[] | join("")' |
+            tail -n +"$KEEP")
+
         if [[ -z $RUN_IDS ]]; then
             break
         fi
