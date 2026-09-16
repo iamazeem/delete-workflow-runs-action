@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eE -o functrace
+set -eE -o functrace -o pipefail
 
 fatal() {
     local LINE="$1"
