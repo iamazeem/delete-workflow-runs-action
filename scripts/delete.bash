@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eE -o functrace -o pipefail
+set -eE -o functrace
 
 fatal() {
     local LINE="$1"
@@ -14,7 +14,7 @@ trap 'fatal "$LINENO" "$BASH_COMMAND"' ERR
 # functions
 
 delete() {
-    echo "::group::Deleting workflow runs"
+    echo "::group::Fetching workflow runs"
 
     local GH_RUN_LIST_ARGS=(--limit 100)
 
@@ -46,6 +46,12 @@ delete() {
     if ((KEEP > 0)); then
         ((KEEP += 1))
     fi
+
+    gh run list "${GH_RUN_LIST_ARGS[@]}"
+
+    echo "::endgroup::"
+
+    echo "::group::Deleting workflow runs"
 
     local DELETE_COUNT=0
 
